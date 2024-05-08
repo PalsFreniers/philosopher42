@@ -12,7 +12,7 @@ MAIN = main.c
 
 ##========== NAMES ==========##
 
-NAME = philosopher
+NAME = philo
 SRCS_DIR = ./
 OBJS_DIR = ./OBJ/
 
@@ -40,16 +40,15 @@ CC = cc
 ##========== FLAGS ==========##
 
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = $(LIBS) #-fsanitize=(address, memory, thread)
+LDFLAGS = $(LIBS) 
 LIBS = 
 
 ##========== MODES ==========##
 
 TIMER = 0.1
-IS_PRINT = 1
 
 ifdef DEBUG
-    CFLAGS += -g -fsanitize=thread
+	CFLAGS += -g -fsanitize=thread #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 
@@ -63,7 +62,7 @@ all : $(CLEAR) $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(MAIN_OBJ)
 	@$(CC) -o $(NAME) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LDFLAGS)
-	@echo "$(GREEN)-= Philosopher compiled =-$(BASE_COLOR)"
+	@echo "$(GREEN)-= $(NAME) compiled =-$(BASE_COLOR)"
 
 clean :
 	@rm -rf $(OBJS_DIR)
@@ -75,28 +74,23 @@ fclean : clean
 re : fclean all
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
-ifeq ($(IS_PRINT),1)
 	@sleep $(TIMER)
 	@clear
-	@echo "$(GREEN)Compiling Pipex$(BASE_COLOR)"
+	@echo "$(GREEN)Compiling $(NAME)$(BASE_COLOR)"
 	@echo "╔==============================================╗"
 	@echo -n "║$(GREEN)"
 	@echo -n "▓"
 	@for i in $$(seq 1 $$(expr $(INDEX) \* 45 / $(NUM_SRC))); do \
 		echo -n "▓"; \
-	done
+		done
 	@for i in $$(seq 1 $$(expr 45 - $(INDEX) \* 45 / $(NUM_SRC))); do \
 		echo -n " "; \
-	done
+		done
 	@echo "$(BASE_COLOR)║"
 	@echo "╚==============================================╝"
-
 	@$(eval INDEX=$(shell expr $(INDEX) + 1))
 	@echo "Compiling : $<"
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
-else
-	@$(CC) $(CFLAGS) -c $< -o $@
-endif
 
 .PHONY : all bonus clean fclean re
