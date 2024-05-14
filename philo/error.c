@@ -6,15 +6,27 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:10:34 by tdelage           #+#    #+#             */
-/*   Updated: 2024/04/21 19:14:53 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/05/14 04:32:43 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
 #include "error.h"
-#include <unistd.h>
+#include "philo.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+void	delete_mtx(struct s_global_data *data)
+{
+	t_u64	i;
+
+	i = 0;
+	while (i < data->num)
+	{
+		pthread_mutex_destroy(&(data->philos[i].fork_left));
+		i++;
+	}
+}
 
 void	slp(struct s_philosopher *self)
 {

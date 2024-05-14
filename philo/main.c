@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:11:37 by tdelage           #+#    #+#             */
-/*   Updated: 2024/04/21 19:15:41 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/05/14 04:31:41 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int	main(int c, char **v)
 		return (1);
 	alloc_global_data(&arena, &data);
 	threads(&data);
+	delete_mtx(&data);
 	ft_arena_destroy(&arena);
 	pthread_mutex_destroy(&data.print_m);
 	pthread_mutex_destroy(&data.global_m);

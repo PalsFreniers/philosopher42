@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:11:47 by tdelage           #+#    #+#             */
-/*   Updated: 2024/04/21 19:15:21 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/05/14 04:29:43 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void						start_eat(struct s_philosopher *self);
 void						check_death(struct s_philosopher *self);
 t_bool						check_forks_ts(struct s_philosopher *self);
 void						slp(struct s_philosopher *self);
+void						delete_mtx(struct s_global_data *data);
 
 #endif // PHILO_H

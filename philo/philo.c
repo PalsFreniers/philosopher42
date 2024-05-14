@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:11:43 by tdelage           #+#    #+#             */
-/*   Updated: 2024/04/20 23:39:15 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/05/14 04:33:41 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ t_bool	global_data_init(int c, char **v, struct s_global_data *data)
 	int	x;
 
 	x = c;
-	while (--x)
-		if (!check(v[x]))
+	while (x)
+	{
+		if (!check(v[x - 1]))
 			return (FALSE);
+		--x;
+	}
 	*data = (struct s_global_data){
 		.num = ft_atol(v[0]),
 		.passes = -1,

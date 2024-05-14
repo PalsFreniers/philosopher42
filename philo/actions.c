@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:10:29 by tdelage           #+#    #+#             */
-/*   Updated: 2024/04/21 03:10:21 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/05/14 04:26:39 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	start_eat(struct s_philosopher *self)
 		self->id);
 	pthread_mutex_unlock(self->print_m);
 	self->state = EATING;
+	self->last_meal = get_time();
 	self->start_eating = get_time();
 }
 
@@ -72,7 +73,6 @@ void	eat(struct s_philosopher *self)
 		pthread_mutex_lock(self->fork_right);
 		*(self->right) = FALSE;
 		pthread_mutex_unlock(self->fork_right);
-		self->last_meal = get_time();
 		self->state = EATED;
 		if (self->passes > 0)
 			self->passes--;
